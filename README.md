@@ -84,19 +84,19 @@ Run both extraction and analysis sequentially.
 
 ### Configuration
 ### Extraction Parameters (in code)
-
+```
 INPUT_PATH = "iSearchIDs.txt"           # Source dataset
 OUTPUT_CSV_PATH = "arxiv_metadata.csv"  # Output file
 ABSTRACT_FOLDER = "abstract_pages"      # HTML cache
 REQUEST_DELAY = 0.5                     # Rate limiting
 DOC_ID_RANGE = (60987, 61041)           # Processing range
-
+```
 ### Analysis Parameters
 
-python
+```python
 csv_path = "arxiv_metadata.csv"         # Input data
 output_dir = "result_analysis"          # Output directory
-
+```
 ## Use Cases
 
 - **Research Analysis**: Study license adoption trends in academic publishing
