@@ -65,16 +65,17 @@ from arxiv_metadata_extractor import ArXivMetadataExtractor
 extractor = ArXivMetadataExtractor()
 extractor.START_DOC_ID = 60987  # Optional: Set range
 extractor.END_DOC_ID = 61041    # Optional: Set range
-extractor.run()
+extractor.run()```
 
 ### 2. Distribution analysis
+```python
 from license_version_analyzer import LicenseVersionAnalyzer
 
 analyzer = LicenseVersionAnalyzer(
     csv_path="arxiv_metadata.csv",
     output_dir="result_analysis"
 )
-analyzer.run_analysis()
+analyzer.run_analysis()```
 
 ### 3. Complete Pipeline
 Run both extraction and analysis sequentially.
