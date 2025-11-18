@@ -1,0 +1,72 @@
+ARXIV LICENSE AND VERSION DISTRIBUTION REPORT
+==================================================
+
+SUMMARY STATISTICS:
+--------------------
+Total records analyzed: 434,815
+Records with license information: 433,185
+Records with version information: 434,763
+License coverage: 99.6%
+Version coverage: 100.0%
+
+TOP 5 LICENSES:
+---------------
+arXiv Assumed (1991–2003): 349,558 (80.4%)
+arXiv Non-exclusive: 52,645 (12.1%)
+arXiv Assumed (19912003): 29,555 (6.8%)
+Unknown: 1,630 (0.4%)
+Other/Unmapped: 1,317 (0.3%)
+
+DETAILED LICENSE DISTRIBUTION:
+------------------------------
+arXiv Assumed (1991–2003): 349,558 (80.4%)
+arXiv Non-exclusive: 52,645 (12.1%)
+arXiv Assumed (19912003): 29,555 (6.8%)
+Unknown: 1,630 (0.4%)
+Other/Unmapped: 1,317 (0.3%)
+CC BY 4.0: 88 (0.0%)
+CC BY-NC-ND 4.0: 12 (0.0%)
+CC BY-NC-SA 4.0: 6 (0.0%)
+CC BY-SA 4.0: 3 (0.0%)
+Invalid URL: 1 (0.0%)
+
+VERSION DISTRIBUTION:
+--------------------
+Unknown: 52 (0.0%)
+v1: 289,202 (66.5%)
+v2: 104,706 (24.1%)
+v3: 29,779 (6.8%)
+v4: 7,647 (1.8%)
+v5: 2,095 (0.5%)
+v6: 729 (0.2%)
+v7: 270 (0.1%)
+v8: 122 (0.0%)
+v9: 63 (0.0%)
+v10: 44 (0.0%)
+v11: 23 (0.0%)
+v12: 12 (0.0%)
+v13: 12 (0.0%)
+v14: 13 (0.0%)
+v15: 4 (0.0%)
+v16: 4 (0.0%)
+v17: 11 (0.0%)
+v18: 5 (0.0%)
+v19: 1 (0.0%)
+v20: 1 (0.0%)
+v21: 2 (0.0%)
+v22: 3 (0.0%)
+v23: 1 (0.0%)
+v27: 1 (0.0%)
+v31: 3 (0.0%)
+v34: 1 (0.0%)
+v41: 1 (0.0%)
+v44: 1 (0.0%)
+v46: 1 (0.0%)
+v57: 1 (0.0%)
+v61: 1 (0.0%)
+v67: 1 (0.0%)
+v75: 1 (0.0%)
+v165: 1 (0.0%)
+v187: 1 (0.0%)
+
+Report generated on: 2025-11-18 15:56:00
