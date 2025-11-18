@@ -73,6 +73,27 @@ class LicenseVersionAnalyzer:
         return dict(sorted(version_counts.items(), 
                          key=lambda x: int(re.search(r'(\d+)', x[0]).group(1)) if re.search(r'(\d+)', x[0]) else 0))
     
+    def generate_summary_statistics(self) -> Dict[str, Any]:
+        """Generate comprehensive summary statistics."""
+        if self.df is None:
+            return {}
+        
+        total_records = len(self.df)
+        valid_licenses = len(self.df[self.df['license_name'] != 'Unknown'])
+        valid_versions = len(self.df[self.df['version'] != 'Unknown'])
+        
+        # Most common licenses
+        top_licenses = self.df['license_name'].value_counts().head(5).to_dict()
+        
+        return {
+            'total_records': total_records,
+            'records_with_license': valid_licenses,
+            'records_with_version': valid_versions,
+            'license_coverage': (valid_licenses / total_records) * 100,
+            'version_coverage': (valid_versions / total_records) * 100,
+            'top_licenses': top_licenses,
+        }
+    
     def plot_license_distribution(self, save_path: str = None) -> None:
         """Create clean license distribution bar plot."""
         if self.df is None:
@@ -146,31 +167,77 @@ class LicenseVersionAnalyzer:
         
         plt.show()
     
+    def generate_report(self, report_name: str = "analysis_report.txt") -> None:
+        """Generate a comprehensive text report."""
+        if self.df is None:
+            return
+        
+        summary = self.generate_summary_statistics()
+        license_dist = self.get_license_distribution()
+        version_dist = self.get_version_distribution()
+        
+        report_path = os.path.join(self.output_dir, report_name)
+        
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write("ARXIV LICENSE AND VERSION DISTRIBUTION REPORT\n")
+            f.write("=" * 50 + "\n\n")
+            
+            f.write("SUMMARY STATISTICS:\n")
+            f.write("-" * 20 + "\n")
+            f.write(f"Total records analyzed: {summary['total_records']:,}\n")
+            f.write(f"Records with license information: {summary['records_with_license']:,}\n")
+            f.write(f"Records with version information: {summary['records_with_version']:,}\n")
+            f.write(f"License coverage: {summary['license_coverage']:.1f}%\n")
+            f.write(f"Version coverage: {summary['version_coverage']:.1f}%\n\n")
+            
+            f.write("TOP 5 LICENSES:\n")
+            f.write("-" * 15 + "\n")
+            for license_name, count in summary['top_licenses'].items():
+                percentage = (count / summary['total_records']) * 100
+                f.write(f"{license_name}: {count:,} ({percentage:.1f}%)\n")
+            
+            f.write("\nDETAILED LICENSE DISTRIBUTION:\n")
+            f.write("-" * 30 + "\n")
+            for license_name, count in license_dist.items():
+                percentage = (count / summary['total_records']) * 100
+                f.write(f"{license_name}: {count:,} ({percentage:.1f}%)\n")
+            
+            f.write("\nVERSION DISTRIBUTION:\n")
+            f.write("-" * 20 + "\n")
+            for version, count in version_dist.items():
+                percentage = (count / summary['total_records']) * 100
+                f.write(f"{version}: {count:,} ({percentage:.1f}%)\n")
+            
+            f.write(f"\nReport generated on: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        
+        print(f"Comprehensive report saved to: {report_path}")
+    
     def run_analysis(self) -> None:
-        """Run the distribution analysis."""
+        """Run the complete distribution analysis."""
         if not self.load_data():
             return
         
         self.preprocess_data()
         
-        # Generate plots with full paths
+        # Generate plots
         self.plot_license_distribution("license_distribution.png")
         self.plot_version_distribution("version_distribution.png")
         
-        # Print summary
+        # Generate comprehensive report
+        self.generate_report("analysis_report.txt")
+        
+        # Print summary to console
+        summary = self.generate_summary_statistics()
         license_dist = self.get_license_distribution()
-        version_dist = self.get_version_distribution()
         
         print("\n" + "="*50)
-        print("DISTRIBUTION SUMMARY")
+        print("ANALYSIS COMPLETED")
         print("="*50)
-        print("\nLICENSE DISTRIBUTION:")
-        for license_name, count in license_dist.items():
-            print(f"  {license_name}: {count} papers")
-        
-        print("\nVERSION DISTRIBUTION:")
-        for version, count in version_dist.items():
-            print(f"  {version}: {count} papers")
+        print(f"Total records: {summary['total_records']:,}")
+        print(f"License coverage: {summary['license_coverage']:.1f}%")
+        print(f"Version coverage: {summary['version_coverage']:.1f}%")
+        print(f"Most common license: {list(summary['top_licenses'].keys())[0]}")
+        print(f"\nOutput files saved to: {self.output_dir}")
 
 
 def main():
